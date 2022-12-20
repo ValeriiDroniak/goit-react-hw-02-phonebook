@@ -14,7 +14,8 @@ export class App extends Component {
     filter: '',
   };
 
-  addContact = (name, number) => {
+  addContact = data => {
+    const { name, number } = data;
     const newName = name.toLowerCase().trim();
     const foundName = this.state.contacts.find(
       contact => contact.name.toLowerCase() === newName
@@ -42,11 +43,6 @@ export class App extends Component {
     }));
   };
 
-  resetFormContact = (name, number) => {
-    name.value = '';
-    number.value = '';
-  };
-
   handleChangeFilter = evt => {
     const request = evt.target.value.toLowerCase();
     this.setState({ filter: request });
@@ -65,10 +61,7 @@ export class App extends Component {
       <>
         <Section bg="#4165f5">
           <Title>Phonebook</Title>
-          <ContactForm
-            onSubmit={this.addContact}
-            resetForm={this.resetFormContact}
-          />
+          <ContactForm onSubmit={this.addContact} />
         </Section>
 
         <Section bg="#4165f5">
